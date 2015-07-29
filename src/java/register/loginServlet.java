@@ -37,6 +37,8 @@ public class loginServlet extends HttpServlet{
         String name = req.getParameter("username");
         String password = req.getParameter("password");
         
+        password = base64Encoder.encrypt(password);
+        System.out.println(password);
         if(name!=null && password!=null)
         {
             //check if there is somebody with that name
@@ -51,14 +53,11 @@ public class loginServlet extends HttpServlet{
                         
                         HttpSession session = req.getSession();
                         session.setAttribute("user", name);
-                        
-                        String ctxPath = req.getContextPath();
-                        
                         //ServletContext ctx = getServletContext();
                         //RequestDispatcher rd = ctx.getRequestDispatcher(ctxPath+"/dashboardServlet");
                         //rd.forward(req, rep);
-                        rep.sendRedirect(ctxPath+"/dashboard");
-                    
+                        String ctxPath = req.getContextPath();
+                        rep.sendRedirect(ctxPath+"/dashboard.jsp");
                     }
                     else
                     {

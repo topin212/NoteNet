@@ -51,7 +51,9 @@ public class dashboardServlet extends HttpServlet {
         user = (String)session.getAttribute("user");
         
         out.println("Welcome, "+user);
-        
+        out.println("<form action=\"logout\" method=\"post\">\n" +
+"            <input type=\"button\" value=\"Log out\">\n" +
+"        </form>");
     }
 
     /**

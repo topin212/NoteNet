@@ -13,29 +13,64 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>NoteNet</title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+         <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     </head>
     <body>
-        <p>You are not yet logged in, please, login with your existing account or sign up to create a new one!</p>
-        <h3>This is a registration form</h3>
-        <form method ="post" action="register" id="regform">
-            <label for="usernameField">Choose a login:</label><input type="text" id="usernameField" name ="username" placeholder="Enter your username">
-            <label for="passwordField">Chosse a password:</label><input type="password" id="passwordField" name ="password" placeholder="Enter your password">
-            <label for="emailField">Enter your E-mail:</label><input type="text" id="emailField" name ="email" placeholder="Enter your email">
-            <input type="submit" value="Sign up!">
-        </form>
-        <h3>This is a login form</h3>
-        
-        <form method ="post" action="login" id="loginform">
-            <label for="usernameFieldLogin">Login or e-mail:</label><input type="text" id="usernameFieldLogin" name ="username" placeholder="Enter your username">
-            <label for="passwordFieldLogin">Password:</label><input type="password" id="passwordFieldLogin" name ="password" placeholder="Enter your password">
-            <input type="submit" value="Sign up!">
-        </form>
-        
-        <br><br><br>
+       <div class="container">
+
+      <form class="form-signin" method="post" action="login">
+        <h2 class="form-signin-heading">Log in right meow</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+      
+      <form class="form-register" method="post" action="register">
+        <h2 class="form-register-heading">No account yet?</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputUsername" class="sr-only">Email address</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
+
+    </div> <!-- /container -->
 
         
-        <%
+    <%--<%
             String sqlRequest = "SELECT * FROM users";
             SQLConnector connector = new SQLConnector();
             ResultSet res = connector.getResult(sqlRequest);
@@ -49,8 +84,7 @@
                 
                 out.println("|"+a+"|"+user+"|"+password+"|"+email+"|"+"<br>");
             }
-            
-          
-        %>
+        %>--%>
+        <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

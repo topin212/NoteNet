@@ -34,11 +34,21 @@ public class SQLConnector {
                
                public void insertValues(String sql)
                {
-                   try {
-                       statement.executeUpdate(sql);
-                   } catch (SQLException ex) {
-                       Logger.getLogger(SQLConnector.class.getName()).log(Level.SEVERE, null, ex);
-                   }
+                    try {
+                        statement = connect.prepareStatement(sql);
+                        statement.executeUpdate();
+                        //if (changed != 1) {
+                        // Something didn't go according to our expectations
+                        //    System.out.println("Error");
+                        //}  
+                    //statement.executeQuery(sql);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        System.out.println("Something gone wrong wile updating.");
+                        Logger.getLogger(SQLConnector.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                   
+                    
                }
                
                public ResultSet getResult(String queue)

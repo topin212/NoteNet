@@ -61,6 +61,29 @@
     </servlet-mapping>
     <!-- end login servlet -->
     
+    <!-- begin logout servlet -->
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>register.logoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <!-- end logout servlet -->
+    
+    <!-- begin logout servlet -->
+    <servlet>
+        <servlet-name>addNoteServlet</servlet-name>
+        <servlet-class>work.addNoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addNoteServlet</servlet-name>
+        <url-pattern>/addNote</url-pattern>
+    </servlet-mapping>
+    <!-- end login servlet -->
+       
+    
     
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

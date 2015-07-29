@@ -26,7 +26,7 @@ public class logoutServlet extends HttpServlet{
             HttpSession sess = req.getSession();
             sess.invalidate();
             String ctxPath = req.getContextPath();
-            rep.sendRedirect(ctxPath+"/login");
+            rep.sendRedirect(ctxPath+"/index.jsp");
         } catch (IOException ex) {
             Logger.getLogger(logoutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
