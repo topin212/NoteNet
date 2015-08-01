@@ -8,6 +8,7 @@
 <%@page import="work.dashboardServlet"%>
 <%@page import="java.sql.*"%>
 <%@page import="register.SQLConnector"%>
+<%@page import="extra.RegEx"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -64,24 +65,50 @@
         -->
         <!--TODO add check of existing session to not let unlogged people here -->
         <div class="container">
-            <form class="list-group" method="post" action="selNoteServlet">
+            <div class="list-group">
                 <%
                     String sqlRequest = "SELECT * FROM userfiles WHERE username = '"+user+"'";
                     SQLConnector sqlConnector = new SQLConnector();
                     ResultSet res = sqlConnector.getResult(sqlRequest);
 
+                    String query = request.getQueryString();//this query looks like "sel=45"
+                    String regulex = "[^=]+=([0-9]+)"; //even this guy returns no matches
+                    String result = null;
+                    Integer selected = null;
+                    
+                    String ctxPath = request.getContextPath();
+                    if(query!=null)
+                    {
+                        result = RegEx.checkRegex(query, regulex);
+                        selected = new Integer(result);
+                    }
+    
+                    //out.println(result);
+                    
                     while(res.next())
                     {
                         int a=res.getInt("id");
-                        String username = res.getString("username");
+                        //String username = res.getString("username");
                         String content = res.getString("content");
-                        String size = res.getString("size");
+                        //String size = res.getString("size");
                         String created = res.getString("created");
-                        out.println("<input type=\"button\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">"+a+created+"</h4><p class=\"list-group-item-text\">"+content+" </p></a>");
+                        if(selected!=null)
+                        {
+                            if(selected!=a){
+                                out.println("<a href="+ctxPath+"/dashboard.jsp?sel="+a+" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">"+a+created+"</h4><p class=\"list-group-item-text\">"+content+" </p></a>");
+                            }
+                            else{
+                                out.println("<a href="+ctxPath+"/dashboard.jsp?sel="+a+" class=\"list-group-item active\"><h4 class=\"list-group-item-heading\">"+a+created+"</h4><p class=\"list-group-item-text\">"+content+" </p></a>");
+                            } 
+                        }
+                        else{
+                        selected = a;
+                        }
+                          
                     }
 
                 %>
-            </form>
+            </div>
             
             
             <form id="input-group" method="POST" class="input-group" action="addNote">
