@@ -1,0 +1,3 @@
+<?php
+$content = $_POST['']
+?>

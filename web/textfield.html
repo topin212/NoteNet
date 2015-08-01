@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="textfield.css" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+    <title>textfield</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <p class="navbar-brand">NotNet</p>
+        
+        <form class="navbar-text navbar-right" action="logout" method="POST">
+
+        <input id="logout" class="navbar-link" type="submit" name="logout" value="logout">
+        
+        </form>
+        <p class="navbar-text navbar-right">Signed in as
+            <button type="button" data-toggle="tooltip" data-placement="bottom"
+                    title="Da, eto topin212."id="logout" class="navbar-link">topin212</button></p>
+        
+    </div> 
+    </nav>
+    
+    <div class="page-header">
+      <h2>Welcome here, stranger.</h2>
+    </div>
+    
+    <div class="container">
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">Первая запись</h4>
+                <p class="list-group-item-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, officia!
+                </p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Вторая запись</h4>
+                <p class="list-group-item-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, officia!
+                </p>
+            </a>
+            <a href="lovitel.jsp/?id=1941" class="list-group-item">
+                <h4 class="list-group-item-heading">Хуевая запись</h4>
+                <p class="list-group-item-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, officia!
+                </p>
+            </a>
+        </div>
+        
+        <div id="editor-group"  class="input-group">
+
+            <div class="btn-group" role="group" id="wysihtml5-toolbar" style="display: none;">
+                <a type="button" class="btn btn-default" data-wysihtml5-command="bold">bold</a>
+                <a type="button" class="btn btn-default" data-wysihtml5-command="italic">italic</a>
+
+                <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
+                <a type="button" class="btn btn-default" data-wysihtml5-command="createLink">insert link</a>
+                <div data-wysihtml5-dialog="createLink" style="display: none;">
+                    <label>
+                        Link:
+                        <input data-wysihtml5-dialog-field="href" value="http://" class="text">
+                    </label>
+                    <a type="button" class="btn btn-default" data-wysihtml5-dialog-action="save">OK</a> <a type="button" class="btn btn-default" data-wysihtml5-dialog-action="cancel">Cancel</a>
+                </div>
+
+            </div>
+            <div>
+
+                <textarea rows="50" id="textfield" type="text" class="form-control" aria-describedby="basic-addon2"></textarea>
+            </div>
+            <div>
+                <button id="subm-btn" onclick="postRequestOnClick()" class="btn btn-primary">Submit</button>
+            </div>
+            <div id="alert">
+                <div class="alert alert-success" role="alert">Запись успешно добавлена</div>
+                <div class="alert alert-danger" role="alert">Ошибка при добавлении записи</div>
+            </div>
+        </div>
+
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script src="bower_components/wysihtml/dist/wysihtml5x-toolbar.min.js"></script>
+<script src="bower_components/wysihtml/parser_rules/advanced_and_extended.js"></script>
+
+<script>
+
+
+  var editor = new wysihtml5.Editor('textfield', {
+    toolbar: 'wysihtml5-toolbar',
+    parserRules:  wysihtml5ParserRules
+  });
+
+  var wysihtml5ParserRules = {
+      tags: {
+          "img": {
+              "check_attributes": {
+                  "width": "numbers",
+                  "alt": "alt",
+                  "src": "url",
+                  "height": "numbers"
+              }
+          }
+      }
+  };
+
+
+  
+  editor.setValue("пизда, сковорода <br> хуй"); //set value
+
+  function postRequestOnClick()  //post request (button onClick)
+  {
+      var content = 'content=' + editor.getValue();
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://mac-accounts-prokopenko.c9.io/Strange_Thing/save.php', false);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("Content-length", content.length);
+      xhr.setRequestHeader("Connection", "close");
+
+      xhr.send(content);
+  }
+
+  $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+    
+    </div>
+
+    
+</body>
+</html>
